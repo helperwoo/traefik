@@ -1,0 +1,24 @@
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: "websecure"
+          scheme: "https"
+          permanent: true
+  websecure:
+    address: ":443"
+#    http:
+#      tls: true
+#  mysql:
+#    address: ":3306"
+providers:
+  file:
+    directory: "./dynamic"
+  docker:
+    exposedbydefault: false
+    network: "traefik"
+api:
+  dashboard: true
+  insecure: true

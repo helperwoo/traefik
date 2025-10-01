@@ -1,0 +1,14 @@
+tcp:
+  routers:
+    my-service:
+      rule: "HostSNI(`my-service.dev`)"
+      entryPoints:
+        - "websecure"
+      service: my-service
+      tls:
+        passthrough: true
+  services:
+    my-service:
+      loadBalancer:
+        servers:
+          - address: "my-service:443"
