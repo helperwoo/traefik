@@ -7,30 +7,30 @@ http:
         - "websecure"
       service: "api@internal"
       tls: {}
-    service1:
-      rule: "Host(`service1.dev`)"
-      service: service1
+    service:
+      rule: "Host(`service.dev`)"
+      service: service
       entryPoints:
         - "websecure"
       tls: {}
   services:
-    service1:
+    service:
       loadBalancer:
         servers:
-          - url: "http://service1:80"
+          - url: "http://service:80"
 # tcp
 tcp:
   routers:
-    service2:
-      rule: "HostSNI(`service2.dev`)"
+    mysql:
+      rule: "HostSNI(`mysql.dev`)"
       entryPoints:
-        - "websecure"
-      service: service2
+        - "mysql"
+      service: mysql
       tls:
         passthrough: true
   services:
-    service2:
+    mysql:
       loadBalancer:
         servers:
-          - address: "service2:443"
+          - address: "mysql:3306"
 

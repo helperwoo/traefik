@@ -9,10 +9,10 @@ entryPoints:
           permanent: true
   websecure:
     address: ":443"
-#    http:
-#      tls: true
-#  mysql:
-#    address: ":3306"
+    http:
+      tls: {}
+  mysql:
+    address: ":3306"
 providers:
   file:
     directory: "./dynamic"
@@ -21,4 +21,4 @@ providers:
     network: "traefik"
 api:
   dashboard: true
-  insecure: true
+  insecure: false

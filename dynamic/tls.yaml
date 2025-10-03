@@ -1,4 +1,0 @@
-tls:
-  certificates:
-    - certFile: /certs/local.pem
-      keyFile:  /certs/local-key.pem
