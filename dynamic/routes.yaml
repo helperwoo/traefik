@@ -1,14 +1,36 @@
-tcp:
+# http
+http:
   routers:
-    my-service:
-      rule: "HostSNI(`my-service.dev`)"
+    dashboard:
+      rule: "Host(`traefik.dev`)"
       entryPoints:
         - "websecure"
-      service: my-service
+      service: "api@internal"
+      tls: {}
+    service1:
+      rule: "Host(`service1.dev`)"
+      service: service1
+      entryPoints:
+        - "websecure"
+      tls: {}
+  services:
+    service1:
+      loadBalancer:
+        servers:
+          - url: "http://service1:80"
+# tcp
+tcp:
+  routers:
+    service2:
+      rule: "HostSNI(`service2.dev`)"
+      entryPoints:
+        - "websecure"
+      service: service2
       tls:
         passthrough: true
   services:
-    my-service:
+    service2:
       loadBalancer:
         servers:
-          - address: "my-service:443"
+          - address: "service2:443"
+
